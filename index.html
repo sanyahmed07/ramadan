@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>রমজান ক্যালেন্ডার ২০২৬</title>
+
+<style>
+body{
+ margin:0;
+ font-family: Arial, sans-serif;
+ background: linear-gradient(180deg,#06142e,#0a2a66);
+ color:#fff;
+ text-align:center;
+ overflow-x:hidden;
+}
+
+/* 🌟 Stars Twinkle - আরও বেশি তারারা */
+.stars{
+ position:fixed;
+ inset:0;
+ background:
+  radial-gradient(2px 2px at 10% 15%, #fff, transparent),
+  radial-gradient(1.5px 1.5px at 20% 30%, #fff, transparent),
+  radial-gradient(2px 2px at 30% 50%, #fff, transparent),
+  radial-gradient(1.2px 1.2px at 40% 70%, #fff, transparent),
+  radial-gradient(1.8px 1.8px at 50% 20%, #fff, transparent),
+  radial-gradient(2px 2px at 60% 40%, #fff, transparent),
+  radial-gradient(1.5px 1.5px at 70% 80%, #fff, transparent),
+  radial-gradient(1.2px 1.2px at 80% 25%, #fff, transparent),
+  radial-gradient(2px 2px at 90% 60%, #fff, transparent);
+ animation: twinkle 1s infinite alternate;
+ z-index:-2;
+}
+@keyframes twinkle{
+ 0%{opacity:0.2;}
+ 50%{opacity:0.7;}
+ 100%{opacity:1;}
+}
+
+/* Header & Moon */
+.header{
+ padding:15px;
+ animation: fadeDown 1.5s;
+ position:relative;
+}
+.header h1{
+ color:#ffd700;
+ font-size:16px;
+ margin:5px 0;
+}
+.moon{
+ font-size:30px;
+ animation: floatMoon 3s infinite;
+ position:relative; z-index:1;
+ display:inline-block;
+}
+
+/* Moon Spark Ring */
+.moon::after{
+ content:"";
+ position:absolute;
+ left:50%; top:50%;
+ width:20px; height:20px;
+ border:2px solid rgba(255,255,0,0.5);
+ border-radius:50%;
+ transform:translate(-50%, -50%) scale(0);
+ animation: sparkRing 1.8s infinite;
+ pointer-events:none;
+}
+@keyframes sparkRing{
+ 0%{transform:translate(-50%,-50%) scale(0.5); opacity:0.7;}
+ 50%{transform:translate(-50%,-50%) scale(1.3); opacity:0.3;}
+ 100%{transform:translate(-50%,-50%) scale(1.8); opacity:0;}
+}
+
+/* Exit Button */
+.exit{
+ position:absolute;
+ top:5px;
+ right:5px;
+ background:red;
+ border:none;
+ color:white;
+ padding:4px 8px;
+ border-radius:15px;
+ font-size:12px;
+ z-index:2;
+}
+
+/* Calendar Grid */
+.calendar{
+ display:grid;
+ grid-template-columns: repeat(4,1fr);
+ gap:6px;
+ padding:10px;
+}
+.day{
+ background: rgba(255,255,255,0.1);
+ border-radius:10px;
+ padding:6px;
+ animation: zoomIn 0.8s;
+ font-size:12px;
+}
+.day span{display:block;font-size:12px;color:#ffd700;}
+.day small{font-size:10px;opacity:0.9;}
+
+/* Footer */
+.footer{padding:10px;font-size:10px;opacity:0.8;}
+
+/* Sidebar */
+.nav{
+ position:fixed;
+ top:0;
+ left:-220px;
+ width:200px;
+ height:100%;
+ background:#081f4a;
+ transition:0.4s;
+ padding-top:50px;
+ z-index:999;
+}
+.nav a{
+ display:block;
+ padding:12px;
+ color:#fff;
+ text-decoration:none;
+ border-bottom:1px solid rgba(255,255,255,0.2);
+ font-size:12px;
+}
+.nav a:hover{background:#0a2a66;}
+.nav.open{left:0;}
+
+/* 💥 Boom Animation around Moon - আরও flashy */
+.boom-wrap{
+ position:absolute;
+ left:50%;
+ top:65px;
+ transform:translateX(-50%);
+ width:150px;height:150px;
+ pointer-events:none;
+ z-index:0;
+}
+.boom{
+ position:absolute;
+ left:50%; top:50%;
+ width:5px;height:5px;
+ border-radius:50%;
+ animation: boom 1.2s infinite;
+ background: gold;
+ box-shadow: 0 0 6px gold, 0 0 12px orange;
+}
+.boom:nth-child(1){transform:rotate(0deg); animation-delay:0s;}
+.boom:nth-child(2){transform:rotate(45deg); animation-delay:.2s;}
+.boom:nth-child(3){transform:rotate(90deg); animation-delay:.4s;}
+.boom:nth-child(4){transform:rotate(135deg); animation-delay:.6s;}
+.boom:nth-child(5){transform:rotate(180deg); animation-delay:.8s;}
+.boom:nth-child(6){transform:rotate(225deg); animation-delay:1s;}
+.boom:nth-child(7){transform:rotate(270deg); animation-delay:1.2s;}
+.boom:nth-child(8){transform:rotate(315deg); animation-delay:1.4s;}
+
+@keyframes boom{
+ 0%{transform:rotate(var(--r)) translate(0) scale(1); opacity:1; background:gold; box-shadow:0 0 6px gold,0 0 12px orange;}
+ 25%{background:orange; box-shadow:0 0 6px orange,0 0 14px #fff;}
+ 50%{transform:rotate(var(--r)) translate(50px) scale(0.8); opacity:0.8; background:white; box-shadow:0 0 8px #fff,0 0 16px gold;}
+ 75%{background:orange; box-shadow:0 0 6px orange,0 0 12px #ffd700;}
+ 100%{transform:rotate(var(--r)) translate(60px) scale(0); opacity:0;}
+}
+
+/* Animations */
+@keyframes floatMoon{0%{transform:translateY(0);}50%{transform:translateY(-6px);}100%{transform:translateY(0);}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-15px);}to{opacity:1;transform:translateY(0);}}
+@keyframes zoomIn{from{opacity:0;transform:scale(0.7);}to{opacity:1;transform:scale(1);}}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- Sidebar -->
+<div class="nav" id="nav">
+ <a href="https://shifat100.github.io/cloudfone/mobimoon/" target="_blank">About</a>
+</div>
+
+<!-- Header -->
+<div class="header">
+ <button class="exit" onclick="window.close()">Exit</button>
+
+ <div class="boom-wrap">
+  <div class="boom" style="--r:0deg"></div>
+  <div class="boom" style="--r:45deg"></div>
+  <div class="boom" style="--r:90deg"></div>
+  <div class="boom" style="--r:135deg"></div>
+  <div class="boom" style="--r:180deg"></div>
+  <div class="boom" style="--r:225deg"></div>
+  <div class="boom" style="--r:270deg"></div>
+  <div class="boom" style="--r:315deg"></div>
+ </div>
+
+ <div class="moon">🌙</div>
+ <h1>রমজান ক্যালেন্ডার ২০২৬</h1>
+ <p style="font-size:10px;">সম্ভাব্য তারিখ (চাঁদ দেখার উপর নির্ভরশীল)</p>
+</div>
+
+<!-- Calendar -->
+<div class="calendar">
+ <div class="day"><span>রোজা ১</span><small>১৮ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ২</span><small>১৯ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৩</span><small>২০ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৪</span><small>২১ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৫</span><small>২২ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৬</span><small>২৩ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৭</span><small>২৪ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৮</span><small>২৫ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ৯</span><small>২৬ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ১০</span><small>২৭ ফেব্রুয়ারি</small></div>
+ <div class="day"><span>রোজা ১১</span><small>২৮ মার্চ</small></div>
+ <div class="day"><span>রোজা ১২</span><small>১ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৩</span><small>২ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৪</span><small>৩ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৫</span><small>৪ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৬</span><small>৫ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৭</span><small>৬ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৮</span><small>৭ মার্চ</small></div>
+ <div class="day"><span>রোজা ১৯</span><small>৮ মার্চ</small></div>
+ <div class="day"><span>রোজা ২০</span><small>৯ মার্চ</small></div>
+ <div class="day"><span>রোজা ২১</span><small>১০ মার্চ</small></div>
+ <div class="day"><span>রোজা ২২</span><small>১১ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৩</span><small>১২ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৪</span><small>১৩ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৫</span><small>১৪ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৬</span><small>১৫ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৭</span><small>১৬ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৮</span><small>১৭ মার্চ</small></div>
+ <div class="day"><span>রোজা ২৯</span><small>১৮ মার্চ</small></div>
+ <div class="day"><span>রোজা ৩০</span><small>১৯ মার্চ</small></div>
+</div>
+
+<div class="footer">
+ 🌙 ঈদুল ফিতর সম্ভাব্য: ২০ মার্চ ২০২৬ <br>
+ © Sany Ahmed Raaz
+</div>
+
+<script>
+let open=false;
+function toggleNav(){
+ open=!open;
+ document.getElementById("nav").classList.toggle("open",open);
+}
+document.addEventListener("keydown",e=>{
+ if(e.key==="ArrowLeft"){toggleNav();}
+});
+</script>
+
+</body>
+</html>
